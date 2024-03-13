@@ -14,15 +14,15 @@ const HeaderBottom = () => {
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
   const ref = useRef();
-  useEffect(() => {
-    document.body.addEventListener("click", (e) => {
-      if (ref.current.contains(e.target)) {
-        setShow(true);
-      } else {
-        setShow(false);
-      }
-    });
-  }, [show, ref]);
+  // useEffect(() => {
+  //   document.body.addEventListener("click", (e) => {
+  //     if (ref.current.contains(e.target)) {
+  //       setShow(true);
+  //     } else {
+  //       setShow(false);
+  //     }
+  //   });
+  // }, [show, ref]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -38,7 +38,7 @@ const HeaderBottom = () => {
     );
     setFilteredProducts(filtered);
   }, [searchQuery]);
-  const { currentUser } = useSelector((state) => state.currentUser);
+
   return (
     <div className="w-full bg-[#F5F5F3] relative">
       <div className="max-w-container mx-auto">
@@ -163,11 +163,11 @@ const HeaderBottom = () => {
                 </li>
               </motion.ul>
             )}
-            {currentUser ? (
+            {/* {currentUser ? (
               <img src={currentUser.result.user_infor.full_name}></img>
             ) : (
               <p> Sign In</p>
-            )}
+            )} */}
 
             <Link to="/cart">
               <div className="relative">

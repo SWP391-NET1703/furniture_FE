@@ -3,7 +3,9 @@ import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import ProductInfo from "../../components/pageProps/productDetails/ProductInfo";
 import { FaDownload } from "react-icons/fa";
-
+import Report from "../../components/home/Products/Report";
+const location = window.location.pathname;
+const _id = location.split("/").pop();
 const tabs = [
   {
     id: "Fiche Technique",
@@ -25,15 +27,20 @@ const tabs = [
         src="https://www.youtube.com/embed/watch?v=6e0yIRDVPlA&list=RD6e0yIRDVPlA&start_radio=1"
         title="YouTube Video"
         frameBorder="0"
-        allowFullScreen
-      ></iframe>
+        allowFullScreen></iframe>
     ),
+  },
+  {
+    id: "Report",
+    label: "Report",
+    content: <Report _id={_id} />,
   },
   // Add more tabs as needed
 ];
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
   const location = useLocation();
+
   const [prevLocation, setPrevLocation] = useState("");
   const [productInfo, setProductInfo] = useState([]);
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -43,7 +50,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    setProductInfo(location.state.item);
+    // setProductInfo(location.state.item);
     setPrevLocation(location.pathname);
   }, [location, productInfo.ficheTech]);
 
@@ -75,8 +82,7 @@ const ProductDetails = () => {
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-gray-800"
                 } py-2 px-4  focus:outline-none`}
-                onClick={() => handleTabClick(tab.id)}
-              >
+                onClick={() => handleTabClick(tab.id)}>
                 {tab.label}
               </button>
             ))}
@@ -85,8 +91,7 @@ const ProductDetails = () => {
             {tabs.map((tab) => (
               <div
                 key={tab.id}
-                className={activeTab === tab.id ? "" : "hidden"}
-              >
+                className={activeTab === tab.id ? "" : "hidden"}>
                 {tab.id === "Fiche Technique" && productInfo.ficheTech ? (
                   <div>
                     <table className="table-auto w-full">
@@ -108,8 +113,7 @@ const ProductDetails = () => {
                           href={productInfo.pdf}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-white"
-                        >
+                          className="text-white">
                           Download PDF
                         </a>{" "}
                       </button>

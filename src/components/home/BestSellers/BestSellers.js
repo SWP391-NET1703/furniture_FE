@@ -10,9 +10,7 @@ const BestSellers = () => {
     //xai axios
     getListBestSeller().then((res) => {
       const { list_best_sellers_interior } = res;
-      // console.log(res);
-      // console.log(message);
-      // console.log(list_best_sellers_interior);
+      console.log(res.data);
       setBestSellers(list_best_sellers_interior);
     });
   }, []);

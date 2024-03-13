@@ -6,12 +6,27 @@ const initialState = {
   products: [],
   checkedBrands: [],
   checkedCategorys: [],
+  isLogin: false,
+  currentUser: null,
 };
 
 export const orebiSlice = createSlice({
   name: "orebi",
   initialState,
   reducers: {
+    signInStart: (state) => {
+      state.loading = true;
+    },
+    signInSuccess: (state, action) => {
+      state.currentUser = action.payload;
+      state.loading = false;
+      state.error = false;
+      state.isLogin = true;
+    },
+    signInFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     addToCart: (state, action) => {
       const item = state.products.find(
         (item) => item._id === action.payload._id
@@ -96,5 +111,8 @@ export const {
   resetCart,
   toggleBrand,
   toggleCategory,
+  signInStart,
+  signInSuccess,
+  signInFailure,
 } = orebiSlice.actions;
 export default orebiSlice.reducer;

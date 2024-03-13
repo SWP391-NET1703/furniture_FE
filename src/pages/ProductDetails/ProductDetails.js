@@ -4,6 +4,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import ProductInfo from "../../components/pageProps/productDetails/ProductInfo";
 import { FaDownload } from "react-icons/fa";
 import Report from "../../components/home/Products/Report";
+import FormReport from "../../components/home/Products/Form.Report";
 const location = window.location.pathname;
 const _id = location.split("/").pop();
 const tabs = [
@@ -33,6 +34,7 @@ const tabs = [
   {
     id: "Report",
     label: "Report",
+    form: <FormReport />,
     content: <Report _id={_id} />,
   },
   // Add more tabs as needed
@@ -122,6 +124,7 @@ const ProductDetails = (props) => {
                 ) : (
                   <p>{tab.content}</p>
                 )}
+                {tab.form}
               </div>
             ))}
           </div>

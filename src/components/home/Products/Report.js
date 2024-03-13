@@ -9,7 +9,6 @@ const Report = (props) => {
       .then((data) => {
         const { interior } = data;
         const { list_report } = interior;
-        console.log(list_report);
         setListReport(list_report);
       });
   }, []);

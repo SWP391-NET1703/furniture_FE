@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../../redux/orebiSlice";
 
 const SignIn = () => {
   // ============= Initial State Start here =============
@@ -23,26 +30,38 @@ const SignIn = () => {
     setPassword(e.target.value);
     setErrPassword("");
   };
-  // ============= Event Handler End here ===============
-  const handleSignUp = (e) => {
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  console.log(formData);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email) {
-      setErrEmail("Enter your email");
-    }
-
-    if (!password) {
-      setErrPassword("Create a password");
-    }
-    // ============== Getting the value ==============
-    if (email && password) {
-      setSuccessMsg(
-        `Hello dear, Thank you for your attempt. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
+    try {
+      dispatch(signInStart());
+      const res = await axios.post(
+        "https://home-vintage-backend.onrender.com/users/login",
+        formData
       );
-      setEmail("");
-      setPassword("");
+      const data = res.data; 
+      setSuccessMsg("Sign in successful!");
+      navigate("/");
+    
+      // You don't need to call res.json() as axios automatically parses JSON responses
+      if (data.success === false) {
+        dispatch(signInFailure(data));
+        return;
+      }
+      dispatch(signInSuccess(data));
+    } catch (error) {
+      dispatch(signInFailure(error));
     }
   };
+  // ============= Event Handler End here ===============
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">
@@ -129,7 +148,10 @@ const SignIn = () => {
             </Link>
           </div>
         ) : (
-          <form className="w-full lgl:w-[450px] h-screen flex items-center justify-center">
+          <form
+            className="w-full lgl:w-[450px] h-screen flex items-center justify-center"
+            onSubmit={handleSubmit}
+          >
             <div className="px-6 py-4 w-full h-[90%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
               <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
                 Sign in
@@ -141,10 +163,10 @@ const SignIn = () => {
                     Work Email
                   </p>
                   <input
-                    onChange={handleEmail}
-                    value={email}
+                    onChange={handleChange}
                     className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                     type="email"
+                    id="email"
                     placeholder="john@workemail.com"
                   />
                   {errEmail && (
@@ -161,10 +183,10 @@ const SignIn = () => {
                     Password
                   </p>
                   <input
-                    onChange={handlePassword}
-                    value={password}
+                    onChange={handleChange}
                     className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                     type="password"
+                    id="password"
                     placeholder="Create password"
                   />
                   {errPassword && (
@@ -176,7 +198,7 @@ const SignIn = () => {
                 </div>
 
                 <button
-                  onClick={handleSignUp}
+                  onSubmit={handleSubmit}
                   className="bg-primeColor hover:bg-black text-gray-200 hover:text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
                 >
                   Sign In

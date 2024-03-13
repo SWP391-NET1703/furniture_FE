@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   // ============= Initial State Start here =============
@@ -26,6 +27,18 @@ const SignUp = () => {
   const [errZip, setErrZip] = useState("");
   // ============= Error Msg End here ===================
   const [successMsg, setSuccessMsg] = useState("");
+  // ============= Event Handler Submit here =============
+  // const formRegister = z.object({
+  //   full_name: z.string().min(1, { message: 'Không được để trống' }),
+  //   email: z.string().min(1, { message: 'Không được để trống' }).email({ message: 'Email is valid' }),
+  //   password: z.string().min(6, { message: 'Tối thiểu 6 kí tự' }),
+  //   confirm_password: z.string().min(6, { message: 'Tối thiểu 6 kí tự' }),
+  //   phone_number: z.string().min(1, { message: 'Không được để trống' }),
+
+  // })
+  // const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(formRegister) })
+  // const navigate = useNavigate() 
+  
   // ============= Event Handler Start here =============
   const handleName = (e) => {
     setClientName(e.target.value);

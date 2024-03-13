@@ -38,7 +38,7 @@ const HeaderBottom = () => {
     );
     setFilteredProducts(filtered);
   }, [searchQuery]);
-  // const {currentUser} = useSelector((state) => state.currentUser);
+
   return (
     <div className="w-full bg-[#F5F5F3] relative">
       <div className="max-w-container mx-auto">

@@ -55,10 +55,11 @@ const NewArrivals = () => {
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
         {newArrivals.map((product) => (
-          <div className="px-2">
+          <div className="px-2" key={product._id}>
             <Product
+              key={product._id}
               _id={product._id}
-              img={product.images[0]}
+              img={product.thumbnail}
               productName={product.interior_name}
               price={product.price}
               color={product.color}

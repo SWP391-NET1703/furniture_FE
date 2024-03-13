@@ -20,8 +20,8 @@ const Product = (props) => {
   const [wishList, setWishList] = useState([]);
   const navigate = useNavigate();
   const productItem = props;
-  const handleProductDetails = () => {
-    navigate(`/product/${rootId}`, {
+  const handleProductDetails = (_id) => {
+    navigate(`/product/${props._id}`, {
       state: {
         item: productItem,
       },
@@ -64,8 +64,7 @@ const Product = (props) => {
                   })
                 )
               }
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
-            >
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
               Add to Cart
               <span>
                 <FaShoppingCart />
@@ -73,8 +72,7 @@ const Product = (props) => {
             </li>
             <li
               onClick={handleProductDetails}
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
-            >
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
               View Details
               <span className="text-lg">
                 <MdOutlineLabelImportant />
@@ -82,8 +80,7 @@ const Product = (props) => {
             </li>
             <li
               onClick={handleWishList}
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
-            >
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
               Add to Wish List
               <span>
                 <BsSuitHeartFill />

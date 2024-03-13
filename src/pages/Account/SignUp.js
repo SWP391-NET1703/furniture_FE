@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   // ============= Initial State Start here =============
@@ -37,8 +37,8 @@ const SignUp = () => {
 
   // })
   // const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(formRegister) })
-  // const navigate = useNavigate() 
-  
+  // const navigate = useNavigate()
+
   // ============= Event Handler Start here =============
   const handleName = (e) => {
     setClientName(e.target.value);
@@ -219,8 +219,7 @@ const SignUp = () => {
             <Link to="/signin">
               <button
                 className="w-full h-10 bg-primeColor rounded-md text-gray-200 text-base font-titleFont font-semibold 
-            tracking-wide hover:bg-black hover:text-white duration-300"
-              >
+            tracking-wide hover:bg-black hover:text-white duration-300">
                 Sign in
               </button>
             </Link>
@@ -403,8 +402,7 @@ const SignUp = () => {
                     checked
                       ? "bg-primeColor hover:bg-black hover:text-white cursor-pointer"
                       : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
-                  } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
-                >
+                  } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}>
                   Create Account
                 </button>
                 <p className="text-sm text-center font-titleFont font-medium">

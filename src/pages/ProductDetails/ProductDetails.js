@@ -122,9 +122,11 @@ const ProductDetails = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <p>{tab.content}</p>
+                  <div>
+                    {tab.form}
+                    {tab.content}
+                  </div>
                 )}
-                {tab.form}
               </div>
             ))}
           </div>
